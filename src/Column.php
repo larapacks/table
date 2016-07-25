@@ -12,6 +12,13 @@ class Column implements HtmlAttributable
     protected $name;
 
     /**
+     * The table columns human readable name.
+     *
+     * @var string
+     */
+    protected $readable;
+
+    /**
      * The value of the column.
      *
      * @var \Closure
@@ -36,16 +43,6 @@ class Column implements HtmlAttributable
     }
 
     /**
-     * Returns the name of the column.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
      * Sets the name of the column.
      *
      * @param string $name
@@ -60,14 +57,39 @@ class Column implements HtmlAttributable
     }
 
     /**
+     * Returns the name of the column.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Sets the human readable name to display in the table.
+     *
+     * @param mixed $name
+     *
+     * @return Column
+     */
+    public function setReadableName($name)
+    {
+        $this->readable = value($name);
+
+        return $this;
+    }
+
+    /**
      * Returns the readable name to be displayed.
      *
      * @return string
      */
     public function getReadableName()
     {
-        return ucwords($this->name);
+        return $this->readable ?: ucwords($this->name);
     }
+
 
     /**
      * {@inheritdoc}
