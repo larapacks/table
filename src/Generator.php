@@ -37,7 +37,9 @@ class Generator implements HtmlAttributable
     {
         $column = new Column($name);
 
-        call_user_func($closure, $column);
+        if ($closure instanceof \Closure) {
+            call_user_func($closure, $column);
+        }
 
         $this->columns[$name] = $column;
 

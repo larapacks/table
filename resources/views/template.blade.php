@@ -28,7 +28,7 @@
 
                                 {!! call_user_func($column->getValue(), $row) !!}
 
-                            @else
+                            @elseif(is_array($row) || $row instanceof ArrayAccess)
 
                                 {!! $row[$column->getName()] !!}
 
