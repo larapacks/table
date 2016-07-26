@@ -7,7 +7,7 @@ use Illuminate\Contracts\Support\Renderable;
 class Table implements Renderable
 {
     /**
-     * @var \Larapacks\Table\Generator
+     * @var \Larapacks\Table\Builder
      */
     protected $generator;
 
@@ -18,7 +18,7 @@ class Table implements Renderable
      */
     public function __construct(\Closure $closure)
     {
-        $generator = new Generator();
+        $generator = new Builder();
 
         call_user_func($closure, $generator);
 
