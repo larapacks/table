@@ -2,6 +2,8 @@
 
 namespace Larapacks\Table;
 
+use Closure;
+
 class Builder implements HtmlAttributable
 {
     /**
@@ -33,14 +35,32 @@ class Builder implements HtmlAttributable
     protected $empty;
 
     /**
-     * Adds a column to the current table.
+     * Sets the columns on the current table.
      *
-     * @param string   $name
-     * @param \Closure $closure
+     * @param array $columns
      *
      * @return Builder
      */
-    public function addColumn($name = '', \Closure $closure = null)
+    public function setColumns($columns = [])
+    {
+        foreach ($columns as $name => $closure) {
+            $closure instanceof Closure ?
+                $this->addColumn($name, $closure) :
+                $this->addColumn($closure);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Adds a column to the current table.
+     *
+     * @param string   $name
+     * @param Closure  $closure
+     *
+     * @return Builder
+     */
+    public function addColumn($name = '', Closure $closure = null)
     {
         $column = new Column($name);
 
@@ -69,9 +89,34 @@ class Builder implements HtmlAttributable
      *
      * @return Builder
      */
-    public function setRows($data)
+    public function setRows($data = [])
     {
-        $this->rows = $data;
+        $rows = [];
+
+        foreach ($data as $record) {
+            $rows[] = new Row($record);
+        }
+
+        $this->rows = $rows;
+
+        return $this;
+    }
+
+    /**
+     * Adds a row to the current table.
+     *
+     * @param mixed   $data
+     * @param Closure $closure
+     *
+     * @return Builder
+     */
+    public function addRow($data = [], Closure $closure = null)
+    {
+        $row = new Row($data);
+
+        ! $closure ?: call_user_func($closure, $row);
+
+        $this->rows[] = $row;
 
         return $this;
     }
