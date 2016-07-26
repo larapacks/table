@@ -42,6 +42,14 @@
 
             @endforeach
 
+            @if(empty($table->getRows()))
+
+                <tr>
+                    <td colspan="{{ count($table->getColumns()) }}">{{ $table->getEmpty() }}</td>
+                </tr>
+
+            @endif
+
         </tbody>
 
     </table>

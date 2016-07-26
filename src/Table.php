@@ -32,6 +32,16 @@ class Table implements Renderable
      */
     public function render()
     {
-        return view('table::template', ['table' => $this->generator])->render();
+        return view($this->template(), ['table' => $this->generator])->render();
+    }
+
+    /**
+     * Returns the configured view template.
+     *
+     * @return string
+     */
+    protected function template()
+    {
+        return config('table.template', 'table::template');
     }
 }

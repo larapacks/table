@@ -87,9 +87,8 @@ class Column implements HtmlAttributable
      */
     public function getReadableName()
     {
-        return $this->readable ?: ucwords($this->name);
+        return $this->readable ?: $this->createReadableName($this->name);
     }
-
 
     /**
      * {@inheritdoc}
@@ -137,5 +136,17 @@ class Column implements HtmlAttributable
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * Creates a readable name.
+     *
+     * @param string $name
+     *
+     * @return string
+     */
+    protected function createReadableName($name)
+    {
+        return ucwords(str_replace('_', ' ', $name));
     }
 }
