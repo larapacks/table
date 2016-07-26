@@ -2,7 +2,7 @@
 
 namespace Larapacks\Table;
 
-class Generator implements HtmlAttributable
+class Builder implements HtmlAttributable
 {
     /**
      * The columns of the table.
@@ -38,7 +38,7 @@ class Generator implements HtmlAttributable
      * @param string   $name
      * @param \Closure $closure
      *
-     * @return Generator
+     * @return Builder
      */
     public function addColumn($name = '', \Closure $closure = null)
     {
@@ -67,7 +67,7 @@ class Generator implements HtmlAttributable
      *
      * @param mixed $data
      *
-     * @return Generator
+     * @return Builder
      */
     public function setRows($data)
     {
@@ -91,7 +91,7 @@ class Generator implements HtmlAttributable
      *
      * @param string $empty
      *
-     * @return Generator
+     * @return Builder
      */
     public function setEmpty($empty)
     {
@@ -107,7 +107,7 @@ class Generator implements HtmlAttributable
      */
     public function getEmpty()
     {
-        return $this->empty ?: config('table.empty', 'There are no records to display.');
+        return $this->empty ?: trans(config('table.empty', 'There are no records to display.'));
     }
 
     /**
