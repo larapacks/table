@@ -7,9 +7,11 @@ use Illuminate\Contracts\Support\Renderable;
 class Table implements Renderable
 {
     /**
+     * The table builder instance.
+     *
      * @var \Larapacks\Table\Builder
      */
-    protected $generator;
+    protected $builder;
 
     /**
      * Constructor.
@@ -18,11 +20,11 @@ class Table implements Renderable
      */
     public function __construct(\Closure $closure)
     {
-        $generator = new Builder();
+        $builder = new Builder();
 
-        call_user_func($closure, $generator);
+        call_user_func($closure, $builder);
 
-        $this->generator = $generator;
+        $this->builder = $builder;
     }
 
     /**
@@ -32,7 +34,7 @@ class Table implements Renderable
      */
     public function render()
     {
-        return view($this->template(), ['table' => $this->generator])->render();
+        return view($this->template(), ['table' => $this->builder])->render();
     }
 
     /**
