@@ -45,11 +45,18 @@ class Row implements HtmlAttributable
     /**
      * Returns the data of row.
      *
+     * @param string|null $column
+     *
      * @return mixed
      */
-    public function getData()
+    public function getData($column = null)
     {
-        return $this->data;
+        if (is_null($column)) {
+            // If were not given a column, we'll return all the row data.
+            return $this->data;
+        }
+
+        return isset($this->data[$column]) ? $this->data[$column] : null;
     }
 
     /**
