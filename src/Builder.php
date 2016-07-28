@@ -132,6 +132,16 @@ class Builder implements HtmlAttributable
     }
 
     /**
+     * Returns true / false if the table is empty.
+     *
+     * @return bool
+     */
+    public function isEmpty()
+    {
+        return empty($this->rows);
+    }
+
+    /**
      * Sets the message to display when no records are present.
      *
      * @param string $empty

@@ -18,21 +18,13 @@
 
             @foreach($table->getRows() as $row)
 
-                <tr>
+                <tr {!! $row->getHtmlAttributes() !!}>
 
                     @foreach($table->getColumns() as $column)
 
                         <td {!! $column->getHtmlAttributes() !!}>
 
-                            @if($column->getValue())
-
-                                {!! call_user_func($column->getValue(), $row->getData()) !!}
-
-                            @elseif(is_array($row->getData()) || $row->getData() instanceof ArrayAccess)
-
-                                {!! $row->getData()[$column->getName()] !!}
-
-                            @endif
+                            {!! $row->getData($column) !!}
 
                         </td>
 
@@ -42,7 +34,7 @@
 
             @endforeach
 
-            @if(empty($table->getRows()))
+            @if($table->isEmpty())
 
                 <tr>
                     <td colspan="{{ count($table->getColumns()) }}">{{ $table->getEmpty() }}</td>
