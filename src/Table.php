@@ -16,15 +16,25 @@ class Table implements Renderable
     /**
      * Constructor.
      *
-     * @param \Closure $closure
+     * @param \Closure|null $closure
      */
-    public function __construct(\Closure $closure)
+    public function __construct(\Closure $closure = null)
     {
         $builder = new Builder();
 
-        call_user_func($closure, $builder);
+        ! $closure ?: call_user_func($closure, $builder);
 
         $this->builder = $builder;
+    }
+
+    /**
+     * Returns the current table builder instance.
+     *
+     * @return \Larapacks\Table\Builder
+     */
+    public function getBuilder()
+    {
+        return $this->builder;
     }
 
     /**

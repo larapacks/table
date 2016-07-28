@@ -83,6 +83,19 @@ class Builder implements HtmlAttributable
     }
 
     /**
+     * Retrieves a column by name.
+     *
+     * @param string $name
+     *
+     * @return bool|mixed
+     */
+    public function getColumn($name)
+    {
+        return array_key_exists($name, $this->columns) ?
+            $this->columns[$name] : false;
+    }
+
+    /**
      * Sets the rows to iterate over.
      *
      * @param mixed $data
