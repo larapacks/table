@@ -4,28 +4,83 @@ namespace Larapacks\Table\Tests;
 
 use Larapacks\Table\Builder;
 use Larapacks\Table\Column;
+use Symfony\Component\Yaml\Tests\B;
 
 class BuilderTest extends TestCase
 {
     public function test_add_column()
     {
-        $builder = new Builder();
+        $b = new Builder();
 
-        $builder->addColumn('column');
+        $b->addColumn('column');
 
-        $this->assertInstanceOf(Column::class, $builder->getColumn('column'));
+        $this->assertInstanceOf(Column::class, $b->getColumn('column'));
+    }
+
+    public function test_add_column_with_closure()
+    {
+        $b = new Builder();
+
+        $b->addColumn('column', function (Column $column) {
+           $column->setValue(function ($data) {
+               return 'Data';
+           });
+        });
+
+
     }
 
     public function test_set_columns()
     {
-        $builder = new Builder();
+        $b = new Builder();
 
-        $builder->setColumns([
+        $b->setColumns([
             'column.1',
             'column.2',
             'column.3',
         ]);
 
-        $this->assertCount(3, $builder->getColumns());
+        $this->assertCount(3, $b->getColumns());
     }
+
+    public function test_add_row()
+    {
+        $b = new Builder();
+
+        $row = ['name' => 'John Doe'];
+
+        $b->addRow($row);
+
+        $this->assertCount(1, $b->getRows());
+        $this->assertEquals($row, $b->getRows()[0]->getData());
+    }
+
+    public function test_set_rows()
+    {
+        $b = new Builder();
+
+        $rows = [
+            ['name' => 'John Doe'],
+            ['name' => 'Jane Doe'],
+        ];
+
+        $b->setRows($rows);
+
+        $this->assertCount(2, $b->getRows());
+        $this->assertEquals($rows[0], $b->getRows()[0]->getData());
+        $this->assertEquals($rows[1], $b->getRows()[1]->getData());
+    }
+
+    public function test_is_empty()
+    {
+        $b = new Builder();
+
+        $this->assertTrue($b->isEmpty());
+
+        $b->addRow(['data...']);
+
+        $this->assertFalse($b->isEmpty());
+    }
+
+
 }
