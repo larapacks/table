@@ -137,7 +137,7 @@ class Builder implements HtmlAttributable
     /**
      * Returns the rows of data.
      *
-     * @return mixed
+     * @return array
      */
     public function getRows()
     {
