@@ -27,7 +27,9 @@ class BuilderTest extends TestCase
            });
         });
 
+        $b->addRow(['data...']);
 
+        $this->assertEquals('Data', $b->getRows()[0]->getData($b->getColumns()[0]));
     }
 
     public function test_set_columns()
