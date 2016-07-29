@@ -21,7 +21,7 @@ class Builder implements HtmlAttributable
     protected $rows = [];
 
     /**
-     * The tables attributes.
+     * The tables HTML attributes.
      *
      * @var array
      */

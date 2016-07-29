@@ -22,7 +22,7 @@ class BuilderTest extends TestCase
         $b = new Builder();
 
         $b->addColumn('column', function (Column $column) {
-           $column->setValue(function ($data) {
+           $column->setValue(function () {
                return 'Data';
            });
         });
