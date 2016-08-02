@@ -43,7 +43,9 @@ class Row implements HtmlAttributable
     }
 
     /**
-     * Returns the data of row.
+     * Returns the data of the specified column.
+     *
+     * If no column is given, then all row data is returned.
      *
      * @param Column $column
      *

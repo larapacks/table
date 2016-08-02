@@ -87,7 +87,7 @@ class Builder implements HtmlAttributable
      *
      * @param string $name
      *
-     * @return bool|mixed
+     * @return bool|Column
      */
     public function getColumn($name)
     {
