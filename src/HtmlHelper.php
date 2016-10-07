@@ -15,7 +15,7 @@ class HtmlHelper
     {
         $html = [];
 
-        foreach ((array) $attributes as $key => $value) {
+        foreach ($attributes as $key => $value) {
             $element = self::attributeElement($key, $value);
 
             if (! is_null($element)) {
