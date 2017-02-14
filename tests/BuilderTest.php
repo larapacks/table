@@ -2,9 +2,8 @@
 
 namespace Larapacks\Table\Tests;
 
-use Larapacks\Table\Builder;
 use Larapacks\Table\Column;
-use Symfony\Component\Yaml\Tests\B;
+use Larapacks\Table\Builder;
 
 class BuilderTest extends TestCase
 {
@@ -29,7 +28,7 @@ class BuilderTest extends TestCase
 
         $b->addRow(['data...']);
 
-        $this->assertEquals('Data', $b->getRows()[0]->getData($b->getColumns()[0]));
+        $this->assertEquals('Data', $b->getRows()[0]->getData($b->getColumns()['column']));
     }
 
     public function test_set_columns()
@@ -83,6 +82,4 @@ class BuilderTest extends TestCase
 
         $this->assertFalse($b->isEmpty());
     }
-
-
 }
